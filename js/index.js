@@ -1,6 +1,9 @@
 // Ambil data email dari localStorage
 const localUser = JSON.parse(localStorage.getItem('user'));
 const localEmail = localUser ? localUser.email : '';
+if(!localEmail){
+  location.href = 'login.html';
+}
 console.log(localEmail)
 
 fetch('https://posdata-16c78-default-rtdb.firebaseio.com/userdata.json')
