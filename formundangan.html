@@ -1,0 +1,353 @@
+<html>
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding:0;
+            margin:0;
+        }
+
+        /* Animasi fade-out-left */
+        @keyframes fadeOutLeft {
+            0% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+        }
+
+        /* Animasi fade-out-right */
+        @keyframes fadeOutRight {
+            0% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+        }
+
+        /* Animasi fade-in-left */
+        @keyframes fadeInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Animasi fade-in-right */
+        @keyframes fadeInRight {
+            0% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Class untuk animasi */
+        .fade-out-left {
+            animation: fadeOutLeft 0.5s forwards;
+        }
+
+        .fade-out-right {
+            animation: fadeOutRight 0.5s forwards;
+        }
+
+        .fade-in-left {
+            animation: fadeInLeft 0.5s forwards;
+        }
+
+        .fade-in-right {
+            animation: fadeInRight 0.5s forwards;
+        }
+
+        /* Sembunyikan form secara default */
+        .hidden {
+            display: none;
+        }
+        #navigasi{
+          position: fixed;
+          bottom: 30px;
+        }
+        #datapria, #datawanita, #dataacara, #dataRsvp{
+          position:absolute;
+        }
+    </style>
+</head>
+<body>
+  <div style="padding:10px;">
+    <h1 class="text-4xl font-bold">Form Data Pernikahan</h1>
+    
+    <div style="width:100%;">
+        <!-- Form pengantin pria -->
+        <div id="datapria">
+            <button class="bg-black text-white py-2 px-4 rounded-full mb-4">Data pengantin pria</button>
+            <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+                <i class="fas fa-link text-gray-500"></i>
+                <div class="ml-4">
+                    <label class="block text-gray-500">Url foto pengantin pria</label>
+                    <input type="text" placeholder="http://example.jpg.com" class="outline-none text-gray-500" id="fotopria">
+                </div>
+            </div><br>
+            <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+                <i class="fas fa-user text-gray-500"></i>
+                <div class="ml-4">
+                    <label class="block text-gray-500">Nama panggilan pengantin pria</label>
+                    <input type="text" placeholder="Ex : William" class="outline-none text-gray-500" id="namamantenpanggilpria">
+                </div>
+            </div><br>
+            <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+                <i class="fas fa-user text-gray-500"></i>
+                <div class="ml-4">
+                    <label class="block text-gray-500">Nama Lengkap pengantin pria</label>
+                    <input type="text" placeholder="Ex : William vensison" class="outline-none text-gray-500" id="namamantenpria">
+                </div>
+            </div><br>
+             <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+                <i class="fas fa-users text-gray-500"></i>
+                <div class="ml-4">
+                    <label class="block text-gray-500">Nama Ayah pengantin pria</label>
+                    <input type="text" placeholder="Ex : Bapak sudarajat S.kom" class="outline-none text-gray-500" id="namaayahpria">
+                </div>
+            </div><br>
+             <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+                <i class="fas fa-users text-gray-500"></i>
+                <div class="ml-4">
+                    <label class="block text-gray-500">Nama Ibu pengantin pria</label>
+                    <input type="text" placeholder="Ex : William" class="outline-none text-gray-500" id="namaibupria">
+                </div>
+            </div><br>              
+        </div>
+
+        <!-- Form pengantin wanita -->
+        <div id="datawanita" class="hidden">
+            <button class="bg-black text-white py-2 px-4 rounded-full mb-4">Data pengantin wanita</button>
+            <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+                          <i class="fas fa-link text-gray-500"></i>
+                          <div class="ml-4">
+                            <label class="block text-gray-500">Url foto pengantin Wanita</label>
+                            <input type="text" placeholder="http://example.jpg.com" class="outline-none text-gray-500" id="fotowanita">
+                          </div>
+                        </div><br>
+                        <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+                          <i class="fas fa-user text-gray-500"></i>
+                          <div class="ml-4">
+                            <label class="block text-gray-500">Nama panggilan pengantin Wnaita</label>
+                            <input type="text" placeholder="Ex : Putri"id="namamantenpanggilwanita" class="outline-none text-gray-500">
+                          </div>
+                        </div><br>
+                        <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+                          <i class="fas fa-user text-gray-500"></i>
+                          <div class="ml-4">
+                            <label class="block text-gray-500">Nama Lengkap pengantin Wanita</label>
+                            <input type="text" placeholder="Ex : Putri Berbie" class="outline-none text-gray-500" id="namamantenwanita">
+                          </div>
+                        </div><br>
+                        <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+                          <i class="fas fa-users text-gray-500"></i>
+                          <div class="ml-4">
+                            <label class="block text-gray-500">Nama Ayah pengantin Wanita</label>
+                            <input type="text" placeholder="Ex : Bapak sudarajat S.kom" class="outline-none text-gray-500" id="namaayahwanita">
+                          </div>
+                        </div><br>
+                        <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+                          <i class="fas fa-users text-gray-500"></i>
+                          <div class="ml-4">
+                            <label class="block text-gray-500">Nama Ibu pengantin Wanita</label>
+                            <input type="text" placeholder="Ex : William" class="outline-none text-gray-500" id="namaibuwanita">
+                          </div>
+                        </div><br>
+        </div>
+
+        <!-- Form acara pernikahan -->
+        <div id="dataacara" class="hidden">
+            <button class="bg-black text-white py-2 px-4 rounded-full mb-4">Data acara pernikahan</button>
+            <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+                <i class="fas fa-calendar text-gray-500"></i>
+                <div class="ml-4">
+                    <label class="block text-gray-500">Tanggal acara</label>
+                    <input type="date" class="outline-none text-gray-500" id="tanggal">
+                </div>
+            </div><br>
+                        <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+                <i class="fas fa-ring text-gray-500"></i>
+                <div class="ml-4">
+                    <label class="block text-gray-500">Akad</label>
+                    <input type="text" placeholder="Ex : Sabtu, 25 Januari 2025" class="outline-none text-gray-500" id="akad">
+                </div>
+            </div><br>
+            <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+                <i class="fas fa-concierge-bell text-gray-500"></i>
+                <div class="ml-4">
+                    <label class="block text-gray-500">Resepsi</label>
+                    <input type="text" placeholder="Ex : Senin, 26 Januari 2025" class="outline-none text-gray-500" id="resepsi">
+                </div>
+            </div><br>
+            <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+                <i class="fas fa-map-pin text-gray-500"></i>
+                <div class="ml-4">
+                    <label class="block text-gray-500">Lokasi acara</label>
+                    <input type="text" placeholder="Ex : Kp. satudua Rt03/03 Desa. Bala bala, Kec. Rengginang, Kab. Sukabumi" class="outline-none text-gray-500" id="lokasi">
+                </div>
+            </div><br>
+             <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+                <i class="fas fa-link text-gray-500"></i>
+                <div class="ml-4">
+                    <label class="block text-gray-500">Url Google maps</label>
+                    <input type="text" placeholder="Ex : Masukan url alamat anda" class="outline-none text-gray-500" id="urlgmaps">
+                </div>
+            </div><br>
+       
+        </div>
+        
+        <!-- Form RSVP -->
+<div id="dataRSVP" class="hidden">
+    <button class="bg-black text-white py-2 px-4 rounded-full mb-4">Data RSVP</button>
+       <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+        <i class="fas fa-question text-gray-500"></i>
+         <div class="ml-4">
+           <label class="block text-gray-400">Nama bank</label>
+         <select class="outline-none text-gray-500" id="namaBank">
+           <option value="Bca">Bca</option>
+           <option value="Bri">Bri</option>
+         </select></div>
+            </div><br>
+         <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+        <i class="fas fa-question text-gray-500"></i>
+         <div class="ml-4">
+           <label class="block text-gray-400">Nomor Rekening</label>
+           <input type="number" class="outline-none text-gray-400" placeholder="Nomor Pemilik rekening" id="norek">
+           </div>
+           </div><br>
+           <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+        <i class="fas fa-question text-gray-500"></i>
+         <div class="ml-4">
+           <label class="block text-gray-400">Nama Rekening</label>
+           <input type="text" class="outline-none text-gray-400" placeholder="Nama pemilik rekening" id="namarek">
+           </div>
+           </div>
+           <br>
+  <button class="bg-blue-400 text-white py-2 px-4 mb-4 rounded" onclick="tambahrekening()"> <i class="fas fa-plus"></i> Tambahkan rekening</button><br>
+    <div id="rekresult" style="display:flex;justify-content: space-evenly;flex-wrap: wrap;"></div>
+             <div class="input-container flex items-center border-2 border-gray-300 rounded-full px-4 py-2">
+        <i class="fas fa-question text-gray-500"></i>
+         <div class="ml-4">
+           <label class="block text-gray-400">Link Foto Gallery (Maksimal 6)</label>
+           <input type="text" class="outline-none text-gray-400" placeholder="Masukan Url Gambar Anda" id="urlgallery">
+           </div>
+           </div>
+           <br>
+  <button class="bg-blue-400 text-white py-2 px-4 mb-4 rounded" onclick="tambahgallery()"> <i class="fas fa-plus"></i> Tambahkan Gambar</button>
+<div id="galleryresult"></div>
+</div>
+
+        <!-- Tombol navigasi -->
+        <div id="navigasi" class="flex justify-evenly">
+            <button id="previous-button" class="bg-red-500 text-white py-2 px-4 rounded-full hidden">Previous</button>
+            <button id="next-button" class="bg-red-500 text-white py-2 px-4 rounded-full" style="display:flex; justify-content: space-between; align-items:center;"> 
+<div role="status" id="spinner" class="hidden">
+    <svg aria-hidden="true" class="w-4 h-4 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+        <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+    </svg>
+    <span class="sr-only">Loading...</span>
+</div>
+ Next</button>
+        </div>
+    </div>
+</div>
+    <script>
+      const dataRSVP = document.getElementById('dataRSVP');
+      const nextButton = document.getElementById('next-button');
+        const previousButton = document.getElementById('previous-button');
+        const dataPria = document.getElementById('datapria');
+        const dataWanita = document.getElementById('datawanita');
+        const dataAcara = document.getElementById('dataacara');
+        
+        let currentForm = 0; // Menyimpan index form yang aktif (0 = datapria, 1 = datawanita, 2 = dataacara)
+
+// Fungsi untuk menampilkan form berikutnya
+nextButton.addEventListener('click', function() {
+    if (currentForm === 0) {
+        // Hide pria with fade-out-left, show wanita with fade-in-right
+        dataPria.classList.add('fade-out-left');
+        setTimeout(function() {
+            dataPria.classList.add('hidden');
+            dataWanita.classList.remove('hidden');
+            dataWanita.classList.add('fade-in-right');
+            currentForm = 1;
+            previousButton.classList.remove('hidden'); // Tampilkan tombol Previous
+        }, 50);
+    } else if (currentForm === 1) {
+        // Hide wanita with fade-out-left, show acara with fade-in-right
+        dataWanita.classList.add('fade-out-left');
+        setTimeout(function() {
+            dataWanita.classList.add('hidden');
+            dataAcara.classList.remove('hidden');
+            dataAcara.classList.add('fade-in-right');
+            currentForm = 2;
+        }, 50);
+    } else if (currentForm === 2) {
+        // Hide acara with fade-out-left, show RSVP with fade-in-right
+        dataAcara.classList.add('fade-out-left');
+        setTimeout(function() {
+            dataAcara.classList.add('hidden');
+            dataRSVP.classList.remove('hidden');
+            dataRSVP.classList.add('fade-in-right');
+            currentForm = 3;
+        }, 50);
+    }else if(currentForm === 3){
+      document.getElementById('next-button').addEventListener('click', submitForm())
+    }
+});
+
+// Fungsi untuk menampilkan form sebelumnya
+previousButton.addEventListener('click', function() {
+    if (currentForm === 1) {
+        // Hide wanita with fade-out-right, show pria with fade-in-left
+        dataWanita.classList.add('fade-out-right');
+        setTimeout(function() {
+            dataWanita.classList.add('hidden');
+            dataPria.classList.remove('hidden');
+            dataPria.classList.add('fade-in-left');
+            currentForm = 0;
+            previousButton.classList.add('hidden'); // Sembunyikan tombol Previous
+        }, 50);
+    } else if (currentForm === 2) {
+        // Hide acara with fade-out-right, show wanita with fade-in-left
+        dataAcara.classList.add('fade-out-right');
+        setTimeout(function() {
+            dataAcara.classList.add('hidden');
+            dataWanita.classList.remove('hidden');
+            dataWanita.classList.add('fade-in-left');
+            currentForm = 1;
+        }, 50);
+    } else if (currentForm === 3) {
+        // Hide RSVP with fade-out-right, show acara with fade-in-left
+        dataRSVP.classList.add('fade-out-right');
+        setTimeout(function() {
+            dataRSVP.classList.add('hidden');
+            dataAcara.classList.remove('hidden');
+            dataAcara.classList.add('fade-in-left');
+            currentForm = 2;
+        }, 50);
+    }
+});
+    </script>
+    <script src="js/Post.js"></script>
+</body>
+</html>

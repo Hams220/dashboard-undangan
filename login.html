@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS System - Login & Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #f7f9fc;
+        }
+
+        .card {
+            border-radius: 15px;
+        }
+
+        .card-title {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .btn-link:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <div id="login-form" class="card shadow-lg border-0">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-4">Login</h3>
+                        <form id="loginForm">
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="loginEmail" placeholder="name@example.com"
+                                    required>
+                                <label for="loginEmail">Email address</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="loginPassword" placeholder="Password"
+                                    required>
+                                <label for="loginPassword">Password</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Login</button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <button id="showRegisterForm" class="btn btn-link">Don't have an account? Register</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="register-form" class="card shadow-lg border-0 mt-3" style="display: none;">
+                    <div class="card-body">
+                        <h3 class="card-title text-center mb-4">Register</h3>
+                        <form id="registerForm">
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="registerEmail"
+                                    placeholder="name@example.com" required>
+                                <label for="registerEmail">Email address</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="registerPassword" placeholder="Password"
+                                    required>
+                                <label for="registerPassword">Password</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="registerUsername" placeholder="Username"
+                                    required>
+                                <label for="registerUsername">Username</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="registerShopName" placeholder="Nama Toko"
+                                    required>
+                                <label for="registerShopName">Nama Toko</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Register</button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <button id="showLoginForm" class="btn btn-link">Already have an account? Login</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            fetch('https://posdata-16c78-default-rtdb.firebaseio.com/userdata.json')
+                .then(response => response.json())
+                .then(data => {
+                    let userExists = false;
+                    for (let key in data) {
+                        if (data[key].email === email && data[key].password === password) {
+                            userExists = true;
+                            localStorage.setItem('user', JSON.stringify(data[key]));
+                            window.location.href = 'index.html';
+                            break;
+                        }
+                    }
+                    if (!userExists) {
+                        Swal.fire({
+                            title: 'Login Failed',
+                            text: 'Invalid email or password.',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Mendapatkan tanggal hari ini
+            const today = new Date();
+            const threeMonthsLater = new Date(today);
+            threeMonthsLater.setMonth(today.getMonth() + 3);
+
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const username = document.getElementById('registerUsername').value;
+            const shopName = document.getElementById('registerShopName').value;
+            const statuspaket = 'Trial';
+
+            fetch('https://posdata-16c78-default-rtdb.firebaseio.com/userdata.json')
+                .then(response => response.json())
+                .then(data => {
+                    let emailExists = false;
+                    let usernameExists = false;
+                    let shopNameExists = false;
+
+                    for (let key in data) {
+                        if (data[key].email === email) {
+                            emailExists = true;
+                        }
+                        if (data[key].username === username) {
+                            usernameExists = true;
+                        }
+                        if (data[key].shopName === shopName) {
+                            shopNameExists = true;
+                        }
+                    }
+
+                    if (emailExists || usernameExists || shopNameExists) {
+                        let errorMessage = '';
+                        if (emailExists) errorMessage += 'Email already exists. ';
+                        if (usernameExists) errorMessage += 'Username already exists. ';
+                        if (shopNameExists) errorMessage += 'Shop name already exists.';
+
+                        Swal.fire({
+                            title: 'Registration Failed',
+                            text: errorMessage,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    } else {
+                        const userData = {
+                            email: email,
+                            password: password,
+                            username: username,
+                            shopName: shopName,
+                            statuspaket: statuspaket,
+                            berlakuhingga: threeMonthsLater
+                        };
+
+                        fetch('https://posdata-16c78-default-rtdb.firebaseio.com/userdata.json', {
+                            method: 'POST',
+                            body: JSON.stringify(userData),
+                            headers: {
+                                'Content-Type': 'application/json'
+                            }
+                        }).then(response => {
+                            if (response.ok) {
+                                Swal.fire({
+                                    title: 'Registration Success!',
+                                    text: 'Your account has been created successfully.',
+                                    icon: 'success',
+                                    confirmButtonText: 'OK'
+                                });
+                                document.getElementById('registerForm').reset();
+                                document.getElementById('register-form').style.display = 'none';
+                                document.getElementById('login-form').style.display = 'block';
+                            } else {
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: 'Failed to create account.',
+                                    icon: 'error',
+                                    confirmButtonText: 'OK'
+                                });
+                            }
+                        });
+                    }
+                });
+        });
+
+        document.getElementById('showRegisterForm').addEventListener('click', function () {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+        });
+
+        document.getElementById('showLoginForm').addEventListener('click', function () {
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        });
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
