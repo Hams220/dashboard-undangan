@@ -53,7 +53,6 @@ let htmlgallery = '';
    }
 
 function submitForm(){
-  const localEmail = 'ilhamalkhuder9@gmail.com';
   const fotopria = document.getElementById('fotopria').value;
   const namamantenpanggilpria = document.getElementById('namamantenpanggilpria').value;
   const namamantenpria = document.getElementById('namamantenpria').value;
